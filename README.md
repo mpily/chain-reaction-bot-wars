@@ -19,10 +19,10 @@ the next r rows contain c states each (pairs of player and number of bombs). If 
 
 For example:
 4 5
-* 1 B 1 # 0 # 0 # 0 
-# 0 # 0 # 0 # 0 # 0 
-# 0 # 0 # 0 B 1 # 0 
-# 0 # 0 # 0 # 0 # 0 
+\* 1 B 1 # 0 # 0 # 0 
+\# 0 # 0 # 0 # 0 # 0 
+\# 0 # 0 # 0 B 1 # 0 
+\# 0 # 0 # 0 # 0 # 0 
 
 
 In the above case cell 0,0 has one of your players, cell 0 1 and 2,3 has an opponents bomb.

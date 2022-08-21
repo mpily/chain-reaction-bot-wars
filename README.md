@@ -18,7 +18,9 @@ The input is as follows, the first line contains 2 integers the number of rows, 
 the next r rows contain c states each (pairs of player and number of bombs). If the player of a cell is a Latin alphabet character ('a' to 'z' or 'A' to 'Z') it represents that another player occupies that cell and thus you should not play there. If it is a '#' it means the  cell is free. If it is a '*' it means that you currently occupy that cell.
 
 For example:
+
 4 5
+
 \* 1 B 1 # 0 # 0 # 0 
 
 \# 0 # 0 # 0 # 0 # 0 

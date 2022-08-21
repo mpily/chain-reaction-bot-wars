@@ -20,8 +20,11 @@ the next r rows contain c states each (pairs of player and number of bombs). If 
 For example:
 4 5
 \* 1 B 1 # 0 # 0 # 0 
+
 \# 0 # 0 # 0 # 0 # 0 
+
 \# 0 # 0 # 0 B 1 # 0 
+
 \# 0 # 0 # 0 # 0 # 0 
 
 

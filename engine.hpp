@@ -20,6 +20,7 @@ struct Move{
 struct Game{
     std::vector<Move> moves_played;
     std::vector<Player>players;
+    std::vector<std::vector<std::vector<Cell>>>game_logs;
     int num_of_players;
     bool first_round;
     Table game_table;
@@ -73,45 +74,10 @@ struct Game{
         return false;
     }
     
-    bool gameOver(){
-        std :: set<char>present_players;
-        
-        for(int i = 0; i < game_table.table_length; ++i){
-            for(int j = 0; j < game_table.table_width; ++j){
-                if(game_table.grid[i][j].occupancy == 0){
-                    continue;
-                }
-                else if(present_players.count(game_table.grid[i][j].owner)){
-                    continue;
-                }
-                else{
-                    present_players.insert(game_table.grid[i][j].owner);
-                }
-            }
-        }
-        
-        if((int)present_players.size() == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
     
-    char getWinner(){
-        for(int i = 0; i < game_table.table_length; ++i){
-            for(int j = 0; j < game_table.table_width; ++j){
-                if(game_table.grid[i][j].occupancy){
-                    return game_table.grid[i][j].owner;
-                }
-            }
-        }
-        std :: cerr << "There is no winner :(\n";
-        exit(2);  
-    }
     
     int playRound(){
-        if(gameOver()){
+        if(game_table.gameOver()){
             std :: cout << "game is over !\n";
             return 0;
         }        
@@ -126,12 +92,14 @@ struct Game{
                     i--;
                 }
                 else{
+                    game_logs.push_back(game_table.grid);
                     continue;
                 }
             }
             else{
                 continue;
             }
+            
         }
         first_round = false;
         return 1;

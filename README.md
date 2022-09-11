@@ -35,4 +35,6 @@ Your bot should output 2 space separated integers the row ,a, and column ,b, it 
 It should be such that  0 <= a < length and 0 <= b < width.
 
 A simple bot can be seen in sampleBot.cpp. Its technique is to fill the first square it can fill prioritising one that it already has bombs present.
+....
 
+In order to visualize the graphics, you can use the make_logs.py file. To use it, after running the game to completion, a file, logfile.txt will be generated in the graphics folder. cd to that folder and run the make_logs file.in order to move to the next state, click on the right half of the screen. to move to the previous state, click on the left half.

@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<set>
 #include<utility>
 #include<vector>
 
@@ -11,6 +12,12 @@ using std::vector;
 struct Table{
     int table_length,table_width;
     vector<vector<Cell>>grid;
+    
+    Table(vector<vector<Cell>>grid_state){
+        grid = grid_state;
+        table_length = grid.size();
+        table_width = grid[0].size();
+    }
     
     Table(int length = 8, int width = 8){
         table_length = length;
@@ -75,7 +82,7 @@ struct Table{
         int dcol[4] = {0,0,-1,1};
         std :: queue<std::pair<int,int>>full_cells;
         full_cells.emplace(row,col);
-        while(full_cells.size()){
+        while(full_cells.size() && !gameOver()){
             auto[curr_row,curr_col] = full_cells.front();
             //std :: cerr << curr_row << " " << curr_col << "being processed\n";
             full_cells.pop();
@@ -100,6 +107,10 @@ struct Table{
                     full_cells.emplace(nxt_row,nxt_col);
                 }
             }
+            //printGrid();
+        }
+        if(gameOver()){
+            std::cerr << getWinner() << "is the winner!\n";
         }
     }
     
@@ -119,5 +130,54 @@ struct Table{
         return 0;
     }
     
+    bool gameOver(){
+        std :: set<char>present_players;
+        
+        for(int i = 0; i < table_length; ++i){
+            for(int j = 0; j < table_width; ++j){
+                if(grid[i][j].occupancy == 0){
+                    continue;
+                }
+                else if(present_players.count(grid[i][j].owner)){
+                    continue;
+                }
+                else{
+                    present_players.insert(grid[i][j].owner);
+                }
+            }
+        }
+        
+        if((int)present_players.size() == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    char getWinner(){
+        for(int i = 0; i < table_length; ++i){
+            for(int j = 0; j < table_width; ++j){
+                if(grid[i][j].occupancy){
+                    return grid[i][j].owner;
+                }
+            }
+        }
+        std :: cerr << "There is no winner :(\n";
+        exit(2);  
+    }
+    
+    void printGrid(){
+        for(int i = 0; i < table_length; ++i){
+            for(int j = 0; j < table_width; ++j){
+                std::cerr << grid[i][j].occupancy << " ";
+            }
+            std::cerr << "\n";
+        }
+        for(int i = 0; i < table_width; ++i){
+            std::cerr << "-";
+        }
+        std::cerr << "\n\n";
+    }
 };
 #endif

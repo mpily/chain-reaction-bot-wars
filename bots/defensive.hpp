@@ -17,10 +17,12 @@ struct RankCells{
     Table state;
     double infinity;
     double epsilon;
+    double bias_factor;
     RankCells(Table curr_state){
-        state    = curr_state;
-        infinity = 1e10;
-        epsilon  = 1e-4; 
+        state       = curr_state;
+        infinity    = 1e10;
+        epsilon     = 1e-4;
+        bias_factor = 0.1; 
     }
     double singleCellCompute(int row,int col){
         /*
@@ -39,12 +41,16 @@ struct RankCells{
                 }
                 
                 score += (1.f/manhattan_distance) * 
-                (double)state.grid[row][col].occupancy /
-                state.grid[row][col].numNeighbours();
+                (double)state.grid[i][j].occupancy /
+                state.grid[i][j].numNeighbours();
             }
         }
+        score += bias_factor * 
+                 (state.grid[row][col].numNeighbours() - 
+                  state.grid[row][col].occupancy);
         return score;
     }
+
     void computeTable(){
         /*
             TODO: you can speed this up with dynamic programming

@@ -12,14 +12,13 @@ using std::vector;
 struct Table{
     int table_length,table_width;
     vector<vector<Cell>>grid;
-    
     Table(vector<vector<Cell>>grid_state){
         grid = grid_state;
         table_length = grid.size();
         table_width = grid[0].size();
     }
     
-    Table(int length = 8, int width = 8){
+    Table(int length = 0, int width = 0){
         table_length = length;
         table_width  = width;
         for(int i = 0; i < table_length; ++i){
